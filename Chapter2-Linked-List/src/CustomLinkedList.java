@@ -1,9 +1,19 @@
-public class LinkedList {
+public class CustomLinkedList {
+    Node head;
 
+    public int size() {
+        int count = 0;
+        var currentNode = head;
+        while(currentNode != null) {
+            count++;
+            currentNode = currentNode.next;
+        }
+        return count;
+    }
 }
 
 class Node {
-    Node next = null;
+    public Node next = null;
     int data;
 
     public Node(int d) {
