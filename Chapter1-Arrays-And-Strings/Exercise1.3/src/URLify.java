@@ -33,6 +33,7 @@ public class URLify {
                 newLength = newLength - 1;
             }
         }
+        String a = "";
         return str;
     }
 }

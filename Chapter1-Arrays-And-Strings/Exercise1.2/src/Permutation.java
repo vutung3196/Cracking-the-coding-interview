@@ -30,6 +30,8 @@ public class Permutation {
         if (s.length() != t.length()) {
             return false;
         }
+        ArrayList<String> a;
+        HashMapList
         return sort(s).equals(sort(t));
     }
 

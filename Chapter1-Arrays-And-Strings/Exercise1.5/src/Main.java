@@ -5,6 +5,7 @@ public class Main {
         System.out.println(oneEditAway("pale", "ple"));
         System.out.println(oneEditAway("pal", "pali"));
         System.out.println(oneEditAway("pale", "bake"));
+        System.out.println('c' - 'a');
     }
 
     // Solution by me
