@@ -11,7 +11,6 @@ public class Main {
         System.out.println(getKthElementFromLast(customLinkedList, 3));
         System.out.println(getKthElementFromLast(customLinkedList, 4));
         System.out.println(getKthElementFromLast(customLinkedList, 1));
-
     }
 
 

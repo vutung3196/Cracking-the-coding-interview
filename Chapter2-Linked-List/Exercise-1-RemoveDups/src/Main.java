@@ -40,5 +40,4 @@ public class Main {
             node = node.next;
         }
     }
-
 }
