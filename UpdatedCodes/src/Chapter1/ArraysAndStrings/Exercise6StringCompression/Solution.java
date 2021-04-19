@@ -1,4 +1,6 @@
-package Chapter1.ArraysAndStrings.Exercise6RotateMatrix;
+package Chapter1.ArraysAndStrings.Exercise6StringCompression;
+
+import java.util.HashMap;
 
 /**
  * aabcccccaaa -> a2b1c5a3

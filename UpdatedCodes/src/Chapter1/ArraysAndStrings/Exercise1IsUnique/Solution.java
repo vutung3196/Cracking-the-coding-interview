@@ -36,6 +36,6 @@ public class Solution {
 
 
     public static void main(String[] args) {
-        isUniqueByUsingArray("abcdefghjkalmnoupi");
+        System.out.println(isUniqueByUsingArray("abcdef"));
     }
 }
