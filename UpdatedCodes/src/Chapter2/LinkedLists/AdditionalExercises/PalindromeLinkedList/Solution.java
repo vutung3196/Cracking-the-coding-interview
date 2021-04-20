@@ -19,12 +19,13 @@ public class Solution {
     }
 
     /**
-     * This can be solved by reversing the 2nd half and compare the two halves. Let's start with an example [1, 1, 2, 1].
-     * In the beginning, set two pointers fast and slow starting at the head.
-     * 1 -> 1 -> 2 -> 1 -> null
-     * (1) Move: fast pointer goes to the end, and slow goes to the middle.
-     * (2) Reverse: the right half is reversed, and slow pointer becomes the 2nd head.
-     * (3) Compare: run the two pointers head and slow together and compare.
+     * This can be solved by reversing the 2nd half and compare the two halves.
+     * <br> Let's start with an example [1, 1, 2, 1].
+     * <br> In the beginning, set two pointers fast and slow starting at the head.
+     * <br> 1 -> 1 -> 2 -> 1 -> null
+     * <br> (1) Move: fast pointer goes to the end, and slow goes to the middle.
+     * <br> (2) Reverse: the right half is reversed, and slow pointer becomes the 2nd head.
+     * <br> (3) Compare: run the two pointers head and slow together and compare.
      */
     public static boolean isPalindromeReferenceSolution(ListNode head) {
         ListNode fast = head, slow = head;
@@ -69,8 +70,8 @@ public class Solution {
     }
 
     /**
-    * reverse a linked list
-    */
+     * reverse a linked list
+     */
     private static ListNode reverse(ListNode head) {
         ListNode prev = null;
         while (head != null) {
