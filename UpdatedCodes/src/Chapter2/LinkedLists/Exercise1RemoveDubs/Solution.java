@@ -1,5 +1,7 @@
 package Chapter2.LinkedLists.Exercise1RemoveDubs;
 
+import Chapter2.LinkedLists.Node;
+
 import java.util.HashSet;
 
 /**
@@ -13,36 +15,27 @@ public class Solution {
      * @param head: head node
      */
     private static void removeDuplicates(Node head) {
-        if (head.Next == null) return;
+        if (head.next == null) return;
         HashSet<Integer> set = new HashSet<>();
         Node previous = null;
         while (head != null) {
-            if (set.contains(head.Data)) {
-                previous.Next = head.Next;
+            if (set.contains(head.data)) {
+                previous.next = head.next;
             } else {
-                set.add(head.Data);
+                set.add(head.data);
                 previous = head;
             }
-            head = head.Next;
+            head = head.next;
         }
-    }
-
-    private static class Node {
-        public Node(int data) {
-            Data = data;
-        }
-
-        public Node Next;
-        public int Data;
     }
 
     public static void main(String[] args) {
         var node = new Node(1);
-        node.Next = new Node(2);
-        node.Next.Next = new Node(3);
-        node.Next.Next.Next = new Node(3);
-        node.Next.Next.Next.Next = new Node(4);
+        node.next = new Node(2);
+        node.next.next = new Node(3);
+        node.next.next.next = new Node(3);
+        node.next.next.next.next = new Node(4);
         removeDuplicates(node);
-        System.out.println(node.Data);
+        System.out.println(node.data);
     }
 }
