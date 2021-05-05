@@ -1,4 +1,4 @@
-package Chapter2.LinkedLists.AdditionalExercises.PalindromeLinkedList;
+package Chapter2.LinkedLists.Exercise7.PalindromeLinkedList;
 
 public class Solution {
     private class ListNode {
