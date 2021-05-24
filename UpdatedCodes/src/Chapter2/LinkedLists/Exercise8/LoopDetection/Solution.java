@@ -8,6 +8,8 @@ import java.util.Set;
 /**
  * Given a circular linked list, implement an <br>
  * algorithm that returns the node at the beginning of the loop
+ * Similar problem: https://leetcode.com/problems/linked-list-cycle-ii/, <br>
+ * https://leetcode.com/problems/find-the-duplicate-number/
  */
 public class Solution {
     static Node detectLoop(Node head) {
@@ -38,8 +40,8 @@ public class Solution {
                 break;
             }
         }
-        if (walker == null || runner == null) return null;
-        runner = head;
+        if (runner == null || runner.next == null) return null;
+        walker = head;
         while (runner != walker) {
             walker = walker.next;
             runner = runner.next;
