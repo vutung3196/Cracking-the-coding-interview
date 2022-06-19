@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Solution {
-    private static BinaryTreeNode<String> previous = new BinaryTreeNode<>("-1");
+    private static BinaryTreeNode<String> predecessor = new BinaryTreeNode<>("-1");
     private static BinaryTreeNode<String> successor = new BinaryTreeNode<>("-1");
     // left - root - right
     // brute-force solution
@@ -44,7 +44,7 @@ public class Solution {
                 while (temp.right != null) {
                     temp = temp.right;
                 }
-                previous = temp;
+                predecessor = temp;
             }
 
             // The minimum value in
@@ -62,15 +62,46 @@ public class Solution {
             successor = root;
             findSuccessor(root.left, searchKey);
         } else {
-            previous = root;
+            predecessor = root;
             findSuccessor(root.right, searchKey);
         }
     }
 
+    public static void findSuccessorV2(BinaryTreeNode<String> root, String searchKey) {
+        if (root == null) return;
+        if (root.data.compareTo(searchKey) == 0) {
+            // maximum value in left subtree => predecessor
+            if (root.left != null) {
+                var temp = root.left;
+                while (temp.right != null) {
+                    temp = temp.right;
+                }
+                predecessor = temp;
+            }
+            // minimum value in right subtree => successor
+            if (root.right != null) {
+                var temp = root.right;
+                while (temp.left != null) {
+                    temp = temp.left;
+                }
+                successor = temp;
+            }
+            return;
+        }
+        if (root.data.compareTo(searchKey) > 0) {
+            successor = root;
+            findSuccessor(root.left, searchKey);
+        } else {
+            predecessor = root;
+            findSuccessor(root.right, searchKey);
+        }
+    }
+
+
     public static void main(String[] args) {
         var root = InitializeBinaryTree.sampleBinarySearchTree();
         findSuccessor(root, "E");
-        System.out.println(previous.data);
+        System.out.println(predecessor.data);
         System.out.println(successor.data);
     }
 }

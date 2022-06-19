@@ -1,22 +1,20 @@
 package Chapter3.StacksAndQueues.Exercise1ThreeInOne;
 
-import java.util.ArrayList;
-import java.util.EmptyStackException;
-import java.util.Stack;
+import java.util.*;
 
 public class FixedMultiStack {
     private final int NUMBER_OF_STACK = 3;
     // total number of elements in each stack
-    private int stackCapacity;
-    private int[] values;
+    private final int stackCapacity;
+    private final int[] values;
     // sizes of each stack. sizes[0] = size of stack[0]
-    private int[] sizes;
+    private final int[] sizes;
 
     public FixedMultiStack(int stackSize) {
         stackCapacity = stackSize;
         values = new int[stackSize * NUMBER_OF_STACK];
         sizes = new int[NUMBER_OF_STACK];
-        var a =new ArrayList<>();
+        var a = new ArrayList<>();
         a.add(false);
         a.set(0, true);
     }
@@ -55,5 +53,33 @@ public class FixedMultiStack {
         // shrink
         sizes[stackNum]--;
         return value;
+    }
+
+    public static int balancedSum(List<Integer> arr) {
+        // Write your code here
+        int sum = 0, leftSum = 0;
+        for (int x : arr) {
+            sum += x;
+        }
+
+        for (int i = 0; i < arr.size(); i++) {
+            if (leftSum == (sum - leftSum - arr.get(i)))
+                return i;
+            leftSum += arr.get(i);
+        }
+        Collections.sort(arr);
+        return 0;
+    }
+
+    public static void main(String[] args) {
+        var a = new ArrayList<Integer>();
+        a.add(10);
+        a.add(2);
+        a.add(3);
+        a.add(3);
+        Collections.sort(a);
+        for (var e : a) {
+            System.out.println(e);
+        }
     }
 }
