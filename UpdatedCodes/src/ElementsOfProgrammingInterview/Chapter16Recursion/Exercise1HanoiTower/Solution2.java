@@ -1,9 +1,6 @@
 package ElementsOfProgrammingInterview.Chapter16Recursion.Exercise1HanoiTower;
 
-import java.util.ArrayList;
-import java.util.Deque;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class Solution2 {
     // Main idea
@@ -16,6 +13,9 @@ public class Solution2 {
         for (int i = 0; i < NUM_PEGS; i++) {
             pegs.add(new LinkedList<>());
         }
+        int[] a = new int[10];
+        Integer[] A = new Integer[10];
+        var b = A.length;
 
         for (int i = numRings; i >= 1; i--) {
             pegs.get(0).addFirst(i);
@@ -24,8 +24,7 @@ public class Solution2 {
         computeTowerHanoiSteps(numRings, pegs, 0, 1, 2);
     }
 
-    private static void computeTowerHanoiSteps(int numRingsToMove, List<Deque<Integer>> pegs,
-                                               int fromPeg, int toPeg, int usePeg) {
+    private static void computeTowerHanoiSteps(int numRingsToMove, List<Deque<Integer>> pegs, int fromPeg, int toPeg, int usePeg) {
         if (numRingsToMove > 0) {
             computeTowerHanoiSteps(numRingsToMove - 1, pegs, fromPeg, usePeg, toPeg);
             var dishToMove = pegs.get(fromPeg).removeFirst();
