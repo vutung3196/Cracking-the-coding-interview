@@ -8,6 +8,7 @@ import java.util.List;
 public class Solution {
     public static final int NUM_PEGS = 3;
     public static void computeTowerHanoi(int numRings) {
+        // initialization
         List<Deque<Integer>> pegs = new ArrayList<>();
         for (int i = 0; i < NUM_PEGS; i++) {
             pegs.add(new LinkedList<>());
