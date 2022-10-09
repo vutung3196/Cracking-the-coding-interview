@@ -15,12 +15,14 @@ public class Solution {
     private static long findMaxNumOfBalancedSubstrings(int l, int r) {
         long maxNumOfSubstrings = 0;
         // found the maximum number of balanced sub strings
-        // s is 
+        // s is
         // TODO: Add logic to find the maximum possible number of balanced non-empty substrings
         return maxNumOfSubstrings;
     }
 
     public static void main(String[] args) {
+        char a = 'a';
+        var b = new StringBuilder(a).toString();
         Scanner in = new Scanner(System.in);
         // Input number of test cases
         int testCaseCount = in.nextInt();

@@ -1,6 +1,5 @@
 package Chapter1.ArraysAndStrings.Exercise2CheckPermutation;
 
-import edu.princeton.cs.algs4.StdIn;
 
 import java.util.Arrays;
 
