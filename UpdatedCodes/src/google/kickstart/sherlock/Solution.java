@@ -11,9 +11,9 @@ import java.util.*;
  * It has the form S1S2, where S1 is a balanced string and S2 is a balanced string.
  */
 public class Solution {
-
     private static long findMaxNumOfBalancedSubstrings(int l, int r) {
         long maxNumOfSubstrings = 0;
+
         // found the maximum number of balanced sub strings
         // s is
         // TODO: Add logic to find the maximum possible number of balanced non-empty substrings
