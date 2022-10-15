@@ -61,5 +61,7 @@ public class Problem2 {
 
     }
 
-
+    private static void sayHello() {
+        System.out.println("Hello World!!!");
+    }
 }
