@@ -16,11 +16,15 @@ public class Solution {
 
     }
 
-    public static int getImbalance(int[] ranks) {
-        var result = 0;
-        Arrays.sort(ranks);
-
-
-        return result;
-    }
+//    public static int getImbalance(int[] ranks) {
+//        var result = 0;
+//        Arrays.sort(ranks);
+//        for (int i = 0; i < ranks.length; i++) {
+//            for (int j = i + 1; j < ; j++) {
+//                if (Arrays)
+//            }
+//        }
+//
+//        return result;
+//    }
 }
