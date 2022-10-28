@@ -40,6 +40,6 @@ public class Solution {
 
     // review solutions from Leetcode!
     private static int[] getSmallestInEfficiency(int[] skills, int k) {
-
+        return new int[10];
     }
 }

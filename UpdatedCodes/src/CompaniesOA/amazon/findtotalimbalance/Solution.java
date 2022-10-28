@@ -49,4 +49,8 @@ public class Solution {
 
         return result;
     }
+
+    public static int getImbalance(List<Integer> rank) {
+        return -1;
+    }
 }
