@@ -24,3 +24,28 @@ for (int i = 1; i <= target; ++i) {
 }
 
 return dp[target]
+
+
+2. Distinct ways.
+2.1 Statement
+Given a target find a number of distinct ways to reach the target.
+
+2.2 Approach
+Sum all possible ways to reach the current state
+routes[i] = routes[i - 1] + routes[i - 2] + ...
+a. Top-Down
+for (int j = 0; j < ways.size(); j++) {
+    result += topDown(target - ways[j])
+}
+return memo[/*state parameters*/] = result
+
+b. Bottom-Up
+for (int i = 1; i <= target; ++i) {
+   for (int j = 0; j < ways.size(); ++j) {
+       if (ways[j] <= i) {
+           dp[i] += dp[i - ways[j]];
+       }
+   }
+}
+
+return dp[target]
