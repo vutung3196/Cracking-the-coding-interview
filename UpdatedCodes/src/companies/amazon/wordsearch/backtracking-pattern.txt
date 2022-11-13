@@ -1,0 +1,4 @@
+// iterate through each cell in the grid
+// in each cell, we invoke the back-tracking function to check if we would obtain a solution starting from this very cell
+// check if the current state is invalid, either the position of the cell is out of the boundary of the board
+//
