@@ -2,7 +2,21 @@ package CompaniesInterview.karat.FindaRectangle;
 
 public class Solution {
     public static void main(String[] args) {
-
+        int[][] board = new int[3][3];
+        board[0][1] = 0;
+        board[0][2] = 0;
+        board[1][1] = 0;
+        board[1][2] = 0;
+        board[0][0] = 1;
+        board[0][2] = 1;
+        board[1][0] = 1;
+        board[2][0] = 1;
+        board[2][1] = 1;
+        board[2][2] = 1;
+        var result = findRectangle(board);
+        for (var element: result) {
+            System.out.println(element);
+        }
     }
 
     /**
@@ -15,7 +29,7 @@ public class Solution {
      * @param board
      * @return
      */
-    public int[] findRectangle(int[][] board) {
+    public static int[] findRectangle(int[][] board) {
         int[]result = new int[4];
         if (board == null || board.length == 0 || board[0].length == 0) return result;
         int foundBottom = 0;
