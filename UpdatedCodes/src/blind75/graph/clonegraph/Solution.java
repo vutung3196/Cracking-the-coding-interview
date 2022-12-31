@@ -3,6 +3,9 @@ package blind75.graph.clonegraph;
 import java.util.*;
 
 public class Solution {
+    public static void main(String[] args) {
+        System.out.println("Hello World");
+    }
 
 // Definition for a Node.
     static class Node {
@@ -50,10 +53,4 @@ public class Solution {
     public static Node cloneGraphDFS(Node node) {
         // TODO
     }
-
-    public static void main(String[] args) {
-
-    }
-
-
 }
