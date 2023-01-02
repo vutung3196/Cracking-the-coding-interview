@@ -21,6 +21,46 @@ public class Solution {
         }
     }
 
+
+     /*
+     * Now the board also includes treasures, denoted by 1.
+     *
+     * Given a board and start and end positions for the player, write a function to return the shortest simple path of open spaces from start to end that includes all the treasures, if any exist. If multiple shortest paths exist, return any of them. A simple path is one that does not revisit any location.
+     *
+     * board3_1 = [
+     *     [  1,  0,  0, 0, 0 ],
+     *     [  0, -1, -1, 0, 0 ],
+     *     [  0, -1,  0, 1, 0 ],
+     *     [ -1,  0,  0, 0, 0 ],
+     *     [  0,  1, -1, 0, 0 ],
+     *     [  0,  0,  0, 0, 0 ],
+     * ]
+     *
+     * board3_2 = [
+     *     [  0,  1, -1 ],
+     *     [  0,  0,  0 ],
+     *     [  0,  0,  0 ],
+     * ]
+     *
+     * treasure(board3_1, (5, 0), (0, 4)) -> None
+     *
+     * treasure(board3_1, (5, 2), (2, 0)) ->
+     *   [(5, 2), (5, 1), (4, 1), (3, 1), (3, 2), (2, 2), (2, 3), (1, 3), (0, 3), (0, 2), (0, 1), (0, 0), (1, 0), (2, 0)]
+     *   Or
+     *   [(5, 2), (5, 1), (4, 1), (3, 1), (3, 2), (3, 3), (2, 3), (1, 3), (0, 3), (0, 2), (0, 1), (0, 0), (1, 0), (2, 0)]
+     *
+     * treasure(board3_1, (0, 0), (4, 1)) ->
+     *   [(0, 0), (0, 1), (0, 2), (0, 3), (1, 3), (2, 3), (2, 2), (3, 2), (3, 1), (4, 1)]
+     *   Or
+     *   [(0, 0), (0, 1), (0, 2), (0, 3), (1, 3), (2, 3), (3, 3), (3, 2), (3, 1), (4, 1)]
+     *
+     * treasure(board3_2, (2, 1), (1, 2)) ->
+     *   [(2, 1), (2, 0), (1, 0), (0, 0), (0, 1), (1, 1), (1, 2)]
+     *
+     * n: width of the input board
+     * m: height of the input board
+     */
+
     /**
      * there is an image filled with 0s and 1s.
      * There is at most one rectangle in this image filled with 0s,

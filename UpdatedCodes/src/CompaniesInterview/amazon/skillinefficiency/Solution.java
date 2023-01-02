@@ -42,6 +42,4 @@ public class Solution {
     private static int[] getSmallestInEfficiency(int[] skills, int k) {
         return new int[10];
     }
-
-
 }
