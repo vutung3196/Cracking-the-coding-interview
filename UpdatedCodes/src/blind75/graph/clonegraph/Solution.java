@@ -52,5 +52,6 @@ public class Solution {
 
     public static Node cloneGraphDFS(Node node) {
         // TODO
+        return null;
     }
 }
