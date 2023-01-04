@@ -49,7 +49,7 @@ public class Solution {
         private boolean[] onStack; // is vertex on the stack
         private Stack<Integer> cycle;
 
-        public DirectedCycle(CompaniesInterview.amazon.courseschedule.Solution.Graph graph) {
+        public DirectedCycle(Graph graph) {
             marked = new boolean[graph.V];
             onStack = new boolean[graph.V];
             edgeTo = new int[graph.V];
@@ -59,7 +59,7 @@ public class Solution {
             }
         }
 
-        private void dfs(CompaniesInterview.amazon.courseschedule.Solution.Graph graph, int v) {
+        private void dfs(Graph graph, int v) {
             onStack[v] = true;
             marked[v] = true;
 
@@ -89,7 +89,7 @@ public class Solution {
         // detecting a cycle in a graph, if yes => return false: impossible to finish all courses
         // return true => can finish all courses
         // initialize the course
-        var graph = new CompaniesInterview.amazon.courseschedule.Solution.Graph(numCourses);
+        var graph = new Graph(numCourses);
 
         for (var edge : prerequisites) {
             var firstNode = edge[0];
@@ -99,7 +99,7 @@ public class Solution {
 
         // detect the DAG in the graph
         // if no topological sort => no cycle in the graph
-        var directedCycle = new CompaniesInterview.amazon.courseschedule.Solution.DirectedCycle(graph);
+        var directedCycle = new DirectedCycle(graph);
         if (!directedCycle.hasCycle()) return false;
         return true;
     }

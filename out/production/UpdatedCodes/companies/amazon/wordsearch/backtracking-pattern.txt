@@ -1,0 +1,19 @@
+// iterate through each cell in the grid
+// in each cell, we invoke the back-tracking function to check if we would obtain a solution starting from this very cell
+// check if the current state is invalid, either the position of the cell is out of the boundary of the board
+//
+
+def backtrack(candidate):
+    if find_solution(candidate):
+        output(candidate)
+        return
+
+    # iterate all possible candidates.
+    for next_candidate in list_of_candidates:
+        if is_valid(next_candidate):
+            # try this partial candidate solution
+            place(next_candidate)
+            # given the candidate, explore further.
+            backtrack(next_candidate)
+            # backtrack
+            remove(next_candidate)

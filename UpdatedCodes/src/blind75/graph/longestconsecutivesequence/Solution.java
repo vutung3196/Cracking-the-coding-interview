@@ -1,6 +1,7 @@
 package blind75.graph.longestconsecutivesequence;
 
-import java.util.Arrays;
+import java.util.HashSet;
+import java.util.*;
 
 public class Solution {
     public static void main(String[] args) {
@@ -39,10 +40,27 @@ public class Solution {
         return false;
     }
 
-    public static int longestConsecutiveUsingSort(int[] nums) {
-        if (nums.length == 0) return 0;
-        Arrays.sort(nums);
-        var longestStreak = 1;
+    /**
+    Time complexity: O(n)
+     */
+    public static int longestConsecutive(int[] nums) {
+        Set<Integer> numSet = new HashSet<>();
+        for (int num : nums) {
+            numSet.add(num);
+        }
 
+        int longestStreak = 0;
+        for (int num : numSet) {
+            if (!numSet.contains(num-1)) {
+                int currentNum = num;
+                int currentStreak = 1;
+                while (numSet.contains(currentNum+1)) {
+                    currentNum+=1;
+                    currentStreak+=1;
+                }
+                longestStreak = Math.max(longestStreak, currentStreak);
+            }
+        }
+        return longestStreak;
     }
 }
