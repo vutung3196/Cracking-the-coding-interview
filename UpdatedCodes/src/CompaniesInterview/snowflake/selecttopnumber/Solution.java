@@ -21,7 +21,59 @@ public class Solution {
 //    Thế là nó duyệt r
 //    K cần optimize
     public static void main(String[] args) {
+        ArrayList<Integer> a1 = new ArrayList<Integer>() {
+            {
+                add(1);
+                add(2);
+                add(3);
+            }
+        };
 
+        ArrayList<Integer> a2 = new ArrayList<Integer>() {
+            {
+                add(4);
+                add(5);
+                add(6);
+            }
+        };
+
+        ArrayList<Integer> a3 = new ArrayList<Integer>() {
+            {
+                add(7);
+                add(8);
+                add(9);
+                add(10);
+            }
+        };
+
+        ArrayList<Integer> a4 = new ArrayList<Integer>() {
+            {
+                add(0);
+            }
+        };
+
+        ArrayList<Integer> a5 = new ArrayList<Integer>() {
+            {
+                add(5);
+                add(13);
+                add(-1);
+            }
+        };
+
+        var input = new ArrayList<ArrayList<Integer>>() {
+            {
+                add(a1);
+                add(a2);
+                add(a3);
+                add(a4);
+                add(a5);
+            }
+        };
+
+        var output = solution(input);
+        for (var element : output) {
+            System.out.println(element);
+        }
     }
 
     // add two elements in each list to queue1
@@ -32,7 +84,7 @@ public class Solution {
     // 0
     // 5, 13, -1
     // output: 2, 3; / 5, 6;/  9, 10; /  13, 5,/ 0 /  8 (additional elements)
-    public static List<Integer> solution(List<List<Integer>> listOfElements) {
+    public static List<Integer> solution(ArrayList<ArrayList<Integer>> listOfElements) {
         if (listOfElements == null || listOfElements.size() == 0) return new ArrayList<>();
         var result = new ArrayList<Integer>();
         var queue1 = new PriorityQueue<Integer>(Collections.reverseOrder());
@@ -49,7 +101,6 @@ public class Solution {
         // queue2:
         // 1, 4, 7, 8, -1 => select 8
         // => result: 2, 3, 5, 6, 9, 10, 0, 13, 5
-
         for (var elements : listOfElements) {
             var container = kLargestElementsInAnArray(elements, 2);
             for (var topElement : container.topLargestElements) {
@@ -70,22 +121,26 @@ public class Solution {
         }
 
         if (queue1.size() == 10) {
-            for (var element : queue1) {
-                result.add(element);
-            }
+            result.addAll(queue1);
         }
         return result;
     }
 
     private static Container kLargestElementsInAnArray(List<Integer> listOfElements, int k) {
+        // check exception
         var result1 = new ArrayList<Integer>();
         var result2 = new ArrayList<Integer>();
-        Collections.sort(listOfElements, Collections.reverseOrder());
+        listOfElements.sort(Collections.reverseOrder());
+        if (listOfElements.size() < k) {
+            result1.addAll(listOfElements);
+            return new Container(result1, result2);
+        }
+
         for (int i = 0; i < k; i++) {
             result1.add(listOfElements.get(i));
         }
 
-        for (int i = k - 1; i < listOfElements.size(); i++) {
+        for (int i = k; i < listOfElements.size(); i++) {
             result2.add(listOfElements.get(i));
         }
 

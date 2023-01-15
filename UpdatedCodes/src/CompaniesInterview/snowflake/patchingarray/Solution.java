@@ -3,6 +3,7 @@ package CompaniesInterview.snowflake.patchingarray;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.HashSet;
+import java.util.concurrent.Executors;
 
 public class Solution {
     public static void main(String[] args) {
@@ -31,7 +32,23 @@ public class Solution {
         return result;
     }
 
+    /**
+    * Given a sorted integer array nums and an integer n, add/patch elements to the array such that any number in the range [1, n] inclusive can be formed by the sum of some elements in the array.
+    Return the minimum number of patches required.
+     */
     public static int minPatches(int[] nums, int n) {
-
+        // any number in the range [1, n] inclusive can be formed by the sum of some elements in the array
+        // miss is the smallest missing number, then we know that
+        int patches = 0, i = 0;
+        long miss = 1;
+        while (miss <= n) {
+            if (miss < nums.length && nums[i] <= miss) {
+                miss += nums[i++];
+            } else {
+                miss += miss;
+                patches++;
+            }
+        }
+        return patches;
     }
 }
