@@ -84,6 +84,7 @@ public class Solution {
     // 0
     // 5, 13, -1
     // output: 2, 3; / 5, 6;/  9, 10; /  13, 5,/ 0 /  8 (additional elements)
+    // Time complexity: O(nlogn)
     public static List<Integer> solution(ArrayList<ArrayList<Integer>> listOfElements) {
         if (listOfElements == null || listOfElements.size() == 0) return new ArrayList<>();
         var result = new ArrayList<Integer>();
@@ -101,9 +102,12 @@ public class Solution {
         // queue2:
         // 1, 4, 7, 8, -1 => select 8
         // => result: 2, 3, 5, 6, 9, 10, 0, 13, 5
+        // 5 elements
         for (var elements : listOfElements) {
+            // o(nlogn)
             var container = kLargestElementsInAnArray(elements, 2);
             for (var topElement : container.topLargestElements) {
+                // O(Log(n))
                 queue1.offer(topElement);
             }
 
@@ -130,6 +134,7 @@ public class Solution {
         // check exception
         var result1 = new ArrayList<Integer>();
         var result2 = new ArrayList<Integer>();
+        // O((n*logn) + k)
         listOfElements.sort(Collections.reverseOrder());
         if (listOfElements.size() < k) {
             result1.addAll(listOfElements);

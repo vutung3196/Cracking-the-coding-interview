@@ -1,6 +1,6 @@
 package CompaniesInterview.drw.minimumexcludedpositivenumber;
 
-import java.util.*l
+import java.util.*;
 public class Solution {
     public static void main(String[] args) {
 
@@ -23,17 +23,34 @@ public class Solution {
     public static int findMexOfC(int[] A, int[] B) {
         int mex = 1;
         int N = A.length;
-        Set<Integer> set = new HashSet<>();
-        Set<>
-        for (int a : A) {
-            if (a > 0) {
-                set.add(a);
+        boolean[] has = new boolean[N + 2];
+        for (int i = 0; i < N; i++) {
+            if (A[i] == B[i]) {
+                has[A[i]] = true;
             }
         }
-        for (int i = 1; i <= N + 1; i++) {
-            if (!set.contains(i)) {
-                return i;
+
+        for (int ans = 1; true; ++ans)
+            if (has[ans] != true) {
+                return ans;
             }
-        }
+    }
+
+
+        // next
+
+
+//        Set<Integer> set = new HashSet<>();
+//        for (int a : A) {
+//            if (a > 0) {
+//                set.add(a);
+//            }
+//        }
+//        for (int i = 1; i <= N + 1; i++) {
+//            if (!set.contains(i)) {
+//                return i;
+//            }
+//        }
+//        return -1;
     }
 }
