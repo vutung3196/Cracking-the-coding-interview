@@ -1,30 +1,24 @@
 package CompaniesInterview.palantir.courseschedule2;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
-public class Solution {
-    public static void main(String[] args) {
-
-    }
-
+class Solution {
     public static class Graph {
-        // number of vertices in the graph
+        // number of nodes
         public int V;
-        // number of edges in the graph
+
+        // number of edges
         public int E;
 
+        // list of adjacency edges for each node
         public List<Integer>[] adj;
 
-        public int[] indegree; // inDegree[i] == in degree of vertex v
+        // inDegree[i] == in degree of vertex i
+        public int[] inDegree;
 
-        /**
-         * Add the directed edge v->w to the graph
-         **/
         public void addEdge(int v, int w) {
             adj[v].add(w);
-            indegree[w]++;
+            inDegree[w]++;
             E++;
         }
 
@@ -35,18 +29,49 @@ public class Solution {
         public Graph(int V) {
             this.V = V;
             this.E = 0;
-            indegree = new int[V];
-            adj = (ArrayList<Integer>[]) new ArrayList[V];
+            this.inDegree = new int[V];
+            this.adj = (ArrayList<Integer>[]) new ArrayList[V];
             for (int v = 0; v < V; v++) {
-                adj[v] = new ArrayList<>();
+                adj[v] = new ArrayList<Integer>();
             }
         }
     }
 
+    public static class TopologicalOrder {
+        private boolean[] marked;
+        private int[] post;
+        private Queue<Integer> postOrder;
+        private int postCounter;
+        private Stack<Integer> topologicalOrder;
+
+        public TopologicalOrder(Graph graph) {
+            marked = new boolean[graph.V];
+            post = new int[graph.V];
+            postOrder = new LinkedList<>();
+            for (int v = 0; v < graph.V; v++) {
+                if (!marked[v]) dfs(graph, v);
+            }
+
+            topologicalOrder = new Stack<>();
+            for (int v : postOrder)
+                topologicalOrder.push(v);
+        }
+
+        private void dfs(Graph graph, int v) {
+            marked[v] = true;
+            for (int w : graph.adj(v)) {
+                if (!marked[w]) dfs(graph, w);
+            }
+            postOrder.add(v);
+            post[v]  = postCounter++;
+        }
+    }
+
+    // initialize a directed cycle class
     public static class DirectedCycle {
         private boolean[] marked;
         private int[] edgeTo;
-        private boolean[] onStack; // is vertex on the stack
+        private boolean[] onStack; // is the vertex on the stack
         private Stack<Integer> cycle;
 
         public DirectedCycle(Graph graph) {
@@ -54,8 +79,9 @@ public class Solution {
             onStack = new boolean[graph.V];
             edgeTo = new int[graph.V];
             for (int v = 0; v < graph.V; v++) {
-                if (!marked[v] && cycle == null)
+                if (!marked[v] && cycle == null) {
                     dfs(graph, v);
+                }
             }
         }
 
@@ -63,14 +89,14 @@ public class Solution {
             onStack[v] = true;
             marked[v] = true;
 
-            for (int w : graph.adj(v)) {
+            for (int w: graph.adj(v)) {
                 if (cycle != null) return;
-                else if (!marked[w]) {
+                else if (!onStack[w]) {
                     edgeTo[w] = v;
                     dfs(graph, w);
                 } else if (onStack[w]) {
                     cycle = new Stack<>();
-                    for (int x = v; x != w ; x = edgeTo[x]) {
+                    for (int x = v; x != w; x = edgeTo[x]) {
                         cycle.push(x);
                     }
                     cycle.push(w);
@@ -80,33 +106,43 @@ public class Solution {
             onStack[v] = false;
         }
 
+        public void findTopologicalOrder() {
+
+        }
+
         public boolean hasCycle() {
             return cycle != null;
         }
     }
 
-    public boolean canFinish(int numCourses, int[][] prerequisites) {
-        // detecting a cycle in a graph, if yes => return false: impossible to finish all courses
-        // return true => can finish all courses
-        // initialize the course
-        var graph = new Graph(numCourses);
-
-        for (var edge : prerequisites) {
-            var firstNode = edge[0];
-            var secondNode = edge[1];
-            graph.addEdge(firstNode, secondNode);
+    /**
+     * There are a total of numCourses courses you have to take, labeled from 0 to numCourses - 1. You are given an array prerequisites where prerequisites[i] = [ai, bi] indicates that you must take course bi first if you want to take course ai.
+     *
+     * For example, the pair [0, 1], indicates that to take course 0 you have to first take course 1.
+     * Return true if you can finish all courses. Otherwise, return false.
+     * @param numCourse
+     * @param prerequisites
+     * @return
+     */
+    public int[] findOrder(int numCourse, int[][] prerequisites) {
+        // build a graph
+        var graph = new Graph(numCourse);
+        for(var edge : prerequisites) {
+            graph.addEdge(edge[0], edge[1]);
         }
-
-        // detect the DAG in the graph
-        // if no topological sort => no cycle in the graph
         var directedCycle = new DirectedCycle(graph);
-        if (!directedCycle.hasCycle()) return false;
-        return true;
-    }
-
-    public int[] findOrder(int numCourses, int[][] prerequisites) {
-        // if containing cycle in the graph => return null
-
-        return null;
+        if (directedCycle.hasCycle()) {
+            return new int[0];
+        } else {
+            var topologicalOrder = new TopologicalOrder(graph);
+            var order = topologicalOrder.topologicalOrder;
+            for (int i : order) {
+                System.out.println(i);
+            }
+            var result = new int[order.size()];
+            for (int i = 0; i < order.size(); i++)
+                result[i] = order.get(i);
+            return result;
+        }
     }
 }

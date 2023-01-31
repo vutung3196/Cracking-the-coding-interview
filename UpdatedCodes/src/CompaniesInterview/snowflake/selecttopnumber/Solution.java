@@ -161,5 +161,4 @@ public class Solution {
             this.otherElements = otherElements;
         }
     }
-
 }
