@@ -15,7 +15,7 @@ public class Solution {
                 low = mid + 1;
             } else if (v < A[mid]) {
                 high = mid - 1;
-            } else if () {
+            } else {
                 return mid;
             }
         }

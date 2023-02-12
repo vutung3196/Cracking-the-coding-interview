@@ -1,5 +1,6 @@
 package CompaniesInterview.drw.minimumexcludedpositivenumber;
 
+import java.util.*;
 public class Solution {
     public static void main(String[] args) {
 
@@ -19,21 +20,21 @@ public class Solution {
     // 1 <= A[i] <= 1e9
     // 1 <= B[i] <= 1e9
     // A and B have the same length.
-    public static int findMexOfC(int[] A, int[] B) {
-        int mex = 1;
-        int N = A.length;
-        boolean[] has = new boolean[N + 2];
-        for (int i = 0; i < N; i++) {
-            if (A[i] == B[i]) {
-                has[A[i]] = true;
-            }
-        }
-
-        for (int ans = 1; true; ++ans)
-            if (has[ans] != true) {
-                return ans;
-            }
-    }
+//    public static int findMexOfC(int[] A, int[] B) {
+//        int mex = 1;
+//        int N = A.length;
+//        boolean[] has = new boolean[N + 2];
+//        for (int i = 0; i < N; i++) {
+//            if (A[i] == B[i]) {
+//                has[A[i]] = true;
+//            }
+//        }
+//
+//        for (int ans = 1; true; ++ans)
+//            if (has[ans] != true) {
+//                return ans;
+//            }
+//    }
 
 
         // next
@@ -51,4 +52,4 @@ public class Solution {
 //            }
 //        }
 //        return -1;
-}
+    }
