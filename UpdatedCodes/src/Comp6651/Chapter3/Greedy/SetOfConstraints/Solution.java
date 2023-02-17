@@ -5,17 +5,20 @@ import java.util.Arrays;
 public class Solution {
     public static void main(String[] args) {
         var n = 6;
-        var m1 = 3;
-        var m2 = 2;
+        var m1 = 4;
+        var m2 = 5;
         var eqConstraints = new int[][]{
                 {0, 1},
                 {1, 2},
-                {2, 3}
+                {2, 3},
+                {1, 5}
         };
         var ineqConstraints = new int[][]{
                 {0, 4},
-                {1, 4}
-        };
+                {1, 4},
+                {2, 4},
+                {3, 4},
+            };
         var result = solve(n, m1, m2, eqConstraints, ineqConstraints);
         System.out.println(Arrays.toString(result));
     }
@@ -94,59 +97,59 @@ public class Solution {
      * @param n number of variables
      * @param m1 number of equality constraints
      * @param m2 number of inequality constraints
-     * @param eqConstraints equality constraints boolean[][]
-     * @param ineqConstraints inequality constraints boolean[][]
+     * @param M1 equality constraints boolean[][]
+     * @param M2 inequality constraints boolean[][]
      * each constraint is represented by a pair of variables
      *       * @return a satisfying assignment or null if no such assignment exists
      */
-    public static int[] solve(int n, int m1, int m2, int[][] eqConstraints, int[][] ineqConstraints) {
-        int[] values = new int[n]; // initialize all variables to be unassigned
+    public static int[] solve(int n, int m1, int m2, int[][] M1, int[][] M2) {
+        int[] S = new int[n]; // initialize all variables to be unassigned
 
         // process all the equality constraints
         for (int i = 0; i < m1; i++) {
-            int x = eqConstraints[i][0];
-            int y = eqConstraints[i][1];
-            if (values[x] == 0 && values[y] == 1) return null; // inconsistent
-            if (values[x] == 1 && values[y] == 0) return null; // inconsistent
-            if (values[x] == 0 && values[y] == 0) {
-                values[x] = 0;
-                values[y] = 0;
+            int x = M1[i][0];
+            int y = M1[i][1];
+            if (S[x] == 0 && S[y] == 1) return null; // inconsistent
+            if (S[x] == 1 && S[y] == 0) return null; // inconsistent
+            if (S[x] == 0 && S[y] == 0) {
+                S[x] = 0;
+                S[y] = 0;
             }
-            if (values[x] == 1 && values[y] == 1) {
-                values[x] = 1;
-                values[y] = 1;
+            if (S[x] == 1 && S[y] == 1) {
+                S[x] = 1;
+                S[y] = 1;
             }
         }
 
         // process all the inequality constraints
         for (int i = 0; i < m2; i++) {
-            int x = ineqConstraints[i][0];
-            int y = ineqConstraints[i][1];
-            if (values[x] == 0 && values[y] == 0) {
-                values[x] = 0;
-                values[y] = 1;
+            int x = M2[i][0];
+            int y = M2[i][1];
+            if (S[x] == 0 && S[y] == 0) {
+                S[x] = 0;
+                S[y] = 1;
             }
-            if (values[x] == 1 && values[y] == 1) {
-                values[x] = 0;
-                values[y] = 1;
+            if (S[x] == 1 && S[y] == 1) {
+                S[x] = 0;
+                S[y] = 1;
             }
-            if (values[x] == 0 && values[y] == 1) continue;
-            if (values[x] == 1 && values[y] == 0) continue;
+//            if (S[x] == 0 && S[y] == 1) continue;
+//            if (S[x] == 1 && S[y] == 0) continue;
         }
 
         // check if all constraints are satisfied
         for (int i = 0; i < m1; i++) {
-            int x = eqConstraints[i][0];
-            int y = eqConstraints[i][1];
-            if (values[x] != values[y]) return null;
+            int x = M1[i][0];
+            int y = M1[i][1];
+            if (S[x] != S[y]) return null;
         }
         for (int i = 0; i < m2; i++) {
-            int x = ineqConstraints[i][0];
-            int y = ineqConstraints[i][1];
-            if (values[x] == values[y]) return null;
+            int x = M2[i][0];
+            int y = M2[i][1];
+            if (S[x] == S[y]) return null;
         }
 
 
-        return values;
+        return S;
     }
 }
