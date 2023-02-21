@@ -1,8 +1,5 @@
 package Comp6651.Chapter4DynamicProgramming.LongestIncreasingSubsequence;
 
-import java.util.Arrays;
-import java.util.Collections;
-
 public class Solution {
     public static void main(String[] args) {
 
