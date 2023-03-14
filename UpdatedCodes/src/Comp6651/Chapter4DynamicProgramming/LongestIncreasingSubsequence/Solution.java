@@ -2,7 +2,8 @@ package Comp6651.Chapter4DynamicProgramming.LongestIncreasingSubsequence;
 
 public class Solution {
     public static void main(String[] args) {
-
+        int[] nums = new int[] {1,2,3,4,5,6};
+        System.out.println(new Solution().lengthOfLIS(nums));
     }
 
     public int lengthOfLIS(int[] nums) {

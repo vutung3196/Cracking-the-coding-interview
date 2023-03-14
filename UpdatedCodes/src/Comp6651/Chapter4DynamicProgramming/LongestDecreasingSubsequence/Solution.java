@@ -5,7 +5,6 @@ public class Solution {
         var nums = new int[]{10, 22, 9, 33, 21, 50, 41, 60};
         var result = lds(nums);
         System.out.println(result);
-
     }
 
     public static int lds(int[] nums) {

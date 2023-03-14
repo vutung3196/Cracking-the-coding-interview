@@ -10,17 +10,21 @@ public class Solution {
     }
 
     // greedy approach
-    public static int solveGreedy(int[][] intervals) {
+    public static int[][] solveGreedy(int[][] intervals) {
         // sort the intervals
         Arrays.sort(intervals, (a, b) -> a[1] - b[1]);
         int count = 0;
         int end = Integer.MIN_VALUE;
+        var list = new ArrayList<int[]>();
         for (var interval : intervals) {
             if (interval[0] >= end) {
                 count++;
+                list.add(interval);
                 end = interval[1];
             }
         }
-        return count;
+        var arr = list.toArray(new int[list.size()][]);
+        return arr;
+//        return count;
     }
 }
