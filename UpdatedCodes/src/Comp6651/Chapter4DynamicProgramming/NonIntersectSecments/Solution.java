@@ -92,9 +92,9 @@ public class Solution {
         while (maxIndex >= 0) {
             resultSegments[index] = segments[maxIndex];
             index--;
-            maxIndex = prev[maxIndex];
+//            maxIndex = prev[maxIndex];
         }
 
-        return result;
+        return resultSegments;
     }
 }

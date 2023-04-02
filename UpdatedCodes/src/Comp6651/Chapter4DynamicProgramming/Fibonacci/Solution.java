@@ -2,7 +2,7 @@ package Comp6651.Chapter4DynamicProgramming.Fibonacci;
 
 public class Solution {
     public static void main(String[] args) {
-
+        System.out.println(iterativeFib(10));
     }
 
     public static int iterativeFib(int n) {

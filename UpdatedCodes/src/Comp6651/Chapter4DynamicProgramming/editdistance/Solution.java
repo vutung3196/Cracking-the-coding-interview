@@ -5,6 +5,7 @@ public class Solution {
         String A = "sunday";
         String B = "saturday";
         System.out.println(editDistance(A, B));
+        System.out.println(EditDistanceV2(A, B));
     }
 
 
@@ -41,5 +42,34 @@ public class Solution {
             }
         }
         return dp[n1][n2];
+    }
+
+    public static int EditDistanceV2(String A, String B) {
+        int m = A.length();
+        int n = B.length();
+        int[][] edit = new int[m][n];
+        for (int i = 0; i < m; i++) {
+            edit[i][0] = i;
+        }
+
+        for (int j = 0; j < n; j++) {
+            edit[0][j] = j;
+        }
+
+        for (int i = 1; i < m; i++) {
+            for (int j = 1; j < n; j++) {
+                var insert = edit[i][j-1] + 1;
+                var delete = edit[i-1][j] + 1;
+                var rep = 0;
+                if (A.charAt(i) == B.charAt(j)) {
+                    rep = edit[i-1][j-1];
+                } else {
+                    rep = edit[i-1][j-1] + 1;
+                }
+                edit[i][j] = Math.min(insert, Math.min(delete, rep));
+            }
+        }
+
+        return edit[m-1][n-1];
     }
 }
