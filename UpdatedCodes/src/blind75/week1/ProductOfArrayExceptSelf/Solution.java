@@ -1,4 +1,4 @@
-package BlindList.Week1.Array.ProductOfArrayExceptSelf;
+package blind75.week1.ProductOfArrayExceptSelf;
 
 
 import java.util.Arrays;

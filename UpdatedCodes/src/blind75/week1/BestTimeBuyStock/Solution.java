@@ -1,4 +1,4 @@
-package BlindList.Week1.Array.BestTimeBuyStock;
+package blind75.week1.BestTimeBuyStock;
 
 public class Solution {
     //    You are given an array prices where prices[i] is the price of a given stock on the ith day.

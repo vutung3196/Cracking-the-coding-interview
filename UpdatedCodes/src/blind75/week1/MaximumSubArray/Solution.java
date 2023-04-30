@@ -1,4 +1,4 @@
-package BlindList.Week1.Array.MaximumSubArray;
+package blind75.week1.MaximumSubArray;
 
 public class Solution {
     /***
