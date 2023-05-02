@@ -7,20 +7,18 @@ public class Solution {
     //    Return the maximum profit you can achieve from this transaction.
     //    If you cannot achieve any profit, return 0.
     private static int maxProfit(int[] prices) {
-        int left = 0;
-        int right = 1;
+        int minPrice = Integer.MAX_VALUE;
         int maxProfit = 0;
-        // starting our while loop and running until
-        // right pointer is less than the length of the array
-        while (right < prices.length) {
-            var currentProfit = prices[right] - prices[left];
-            if (prices[left] < prices[right]) {
-                maxProfit = Math.max(currentProfit, maxProfit);
-            } else {
-                left = right;
+        // idea: finding min price first
+        // calculate the maximum profit based on the min price
+        for (int i = 0; i < prices.length; i++) {
+            if (prices[i] < minPrice) {
+                minPrice = prices[i];
+            } else if (prices[i] - minPrice > maxProfit) {
+                maxProfit = prices[i] - minPrice;
             }
-            right++;
         }
+
         return maxProfit;
     }
 
