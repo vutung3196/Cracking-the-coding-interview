@@ -1,7 +1,7 @@
 package blind75.week2.longestpalindrome;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Solution {
     public static void main(String[] args) {
@@ -9,24 +9,20 @@ public class Solution {
     }
 
     public int longestPalindrome(String s) {
-        var characterToCount = new HashMap<Character, Integer>();
-        for (var character : s.toCharArray()) {
-            var currentCount = characterToCount.getOrDefault(character, 0);
-            characterToCount.put(character, currentCount + 1);
+        if (s == null || s.length() == 1) {
+            return 1;
         }
 
-        var result = 0;
-        var oddCounts = 0;
-        for (var character : characterToCount.keySet()) {
-            var currentCount = characterToCount.get(character);
-            if (currentCount % 2 == 0) {
-                result += currentCount;
+        Set<Character> characterSet = new HashSet<Character>();
+        for (var character : s.toCharArray()) {
+            if (characterSet.contains(character)) {
+                characterSet.remove(character);
             } else {
-                oddCounts += currentCount;
+                characterSet.add(character);
             }
         }
 
-        // not complete
-        return result + oddCounts;
+        if (characterSet.size() <= 1) return s.length();
+        return s.length() - characterSet.size() + 1;
     }
 }
