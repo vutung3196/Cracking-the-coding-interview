@@ -45,4 +45,15 @@ public class Solution {
         }
         return downOne;
     }
+
+    private static int minCostClimbingStairs2(int[] cost) {
+        int[] D = new int[cost.length+1];
+        D[0] = 0;
+        D[1] = 0;
+        for (int i = 2; i < cost.length + 1; i++) {
+            D[i] = Math.min(D[i-1] + cost[i - 1], D[i-2] + cost[i-2]);
+        }
+
+        return D[cost.length];
+    }
 }

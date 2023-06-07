@@ -29,6 +29,26 @@ public class Solution {
         return dp[0][0];
     }
 
+    private static int minimumPathSum(int[][] grid) {
+        // define the semantic array
+        int[][] dp = new int[grid.length][grid[0].length];
+        for (int i = grid.length - 1; i >= 0; i--) {
+            for (int j = grid[0].length - 1; j >= 0; j--) {
+                if (i == grid.length - 1 && j != grid[0].length - 1) {
+                    dp[i][j] = grid[i][j] + dp[i][j+1];
+                } else if (i != grid.length - 1 && j == grid[0].length - 1) {
+                    dp[i][j] = grid[i][j] + dp[i+1][j];
+                } else if (i != grid.length - 1 && j != grid[0].length - 1) {
+                    dp[i][j] = grid[i][j] + Math.min(dp[i+1][j], dp[i][j+1]);
+                } else {
+                    dp[i][j] = grid[i][j];
+                }
+            }
+        }
+
+        return dp[0][0];
+    }
+
     /**
      * Using 1 array
      * o(m*n): time complexity
