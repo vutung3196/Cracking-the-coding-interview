@@ -90,7 +90,9 @@ public class Solution {
     }
 
     public int coinChangeUpdate(int[] coins, int amount) {
+        int max = amount + 1;
         int[] dp = new int[amount + 1];
+        Arrays.fill(dp, max);
         for (int j = 1; j <= amount; j++) {
             for (int i = 0; i < coins.length; i++) {
                 if (coins[i] < j) {
