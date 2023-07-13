@@ -1,4 +1,4 @@
-package ElementsOfProgrammingInterview.chapter1;
+package ElementsOfProgrammingInterview.chapter1Bitmanipulation;
 
 public class SwapBits {
     public static void main(String[] args) {

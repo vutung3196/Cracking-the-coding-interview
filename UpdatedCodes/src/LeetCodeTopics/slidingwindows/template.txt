@@ -1,0 +1,12 @@
+1. Sliding Window (Shrinkable)
+   int i = 0, j = 0, ans = 0;
+   for (; j < N; ++j) {
+        for (; invalid(); ++i) {
+            // CODE: update state using A[i]
+        }
+        ans = max(ans, j - i + 1)
+   }
+
+   return ans;
+
+2.

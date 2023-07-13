@@ -6,8 +6,6 @@ public class Solution {
     }
 
     int findMaximumSum(int[] stockPrices, int k) {
-
-
         return -1;
     }
 }

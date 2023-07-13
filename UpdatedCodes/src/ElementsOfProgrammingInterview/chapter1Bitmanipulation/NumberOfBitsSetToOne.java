@@ -1,10 +1,10 @@
-package ElementsOfProgrammingInterview.chapter1;
+package ElementsOfProgrammingInterview.chapter1Bitmanipulation;
 
 public class NumberOfBitsSetToOne {
 
     public static void main(String[] args) {
         // Writing a program to count the number of bits that are set to 1 in an integer
-        // Time complexity: O(1), where n is the number of bits in the integer word
+        // Time complexity: O(n), where n is the number of bits in the integer word
         System.out.println(calculate(1234));
         System.out.println(calculate(1235));
         System.out.println(calculate(1236));
