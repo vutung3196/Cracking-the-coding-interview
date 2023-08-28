@@ -1,6 +1,7 @@
 package LeetCodeTopics.TwoPointers.RunningFromBothEnds;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Solution {
     public int[] twoSum(int[] numbers, int target) {
@@ -23,5 +24,13 @@ public class Solution {
         var a = new ArrayList<Integer>();
 
         return indice;
+    }
+
+
+    public static void main(String[] args) {
+        List<String> list = List.of("one", "two", "three");
+        for (String s : list) {
+            System.out.println(s);
+        }
     }
 }
