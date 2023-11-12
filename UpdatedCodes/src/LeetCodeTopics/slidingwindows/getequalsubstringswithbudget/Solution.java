@@ -6,7 +6,6 @@ public class Solution {
     }
 
     public int equalSubstring(String s, String t, int maxCost) {
-
+        return -1;
     }
 }
-l
