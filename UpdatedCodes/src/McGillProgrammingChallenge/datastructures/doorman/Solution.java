@@ -1,6 +1,7 @@
 package McGillProgrammingChallenge.datastructures.doorman;
 
 public class Solution {
+    // Problem: https://open.kattis.com/problems/doorman
     public static void main(String[] args) {
         var scanner = new java.util.Scanner(System.in);
         System.out.println("Please enter the diff: ");
