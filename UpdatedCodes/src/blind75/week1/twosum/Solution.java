@@ -25,6 +25,10 @@ public class Solution {
         return result;
     }
 
+    public static void sayHello() {
+        System.out.println("Hello World!!!");
+    }
+
     public static void main(String[] args) {
         var nums = new int[]{3, 3};
         int target = 6;

@@ -36,4 +36,8 @@ public class UnionFind {
 
         return true;
     }
+
+    public int size(int x) {
+        return rank[find(x)];
+    }
 }
