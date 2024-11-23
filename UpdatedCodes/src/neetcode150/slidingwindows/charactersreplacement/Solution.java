@@ -1,6 +1,9 @@
 package neetcode150.slidingwindows.charactersreplacement;
 
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Solution {
     public static void main(String[] args) {
 
@@ -33,5 +36,26 @@ public class Solution {
         return maxLength;
     }
 
+    public int characterReplacementRedo(String s, int k) {
+        // finding the replacement in between k
+        int left = 0;
+        Map<Character, Integer> map = new HashMap<>();
+        int maxCount = 0;
+        int right = 0;
+        int maxLength = 0;
+        while (right < s.length()) {
+            map.put(s.charAt(right), map.getOrDefault(s.charAt(right), 0) + 1);
+            maxCount = Math.max(maxCount, map.get(s.charAt(right)));
 
+            // shrink the windows since we don't have enough characters
+            if (right - left + 1 > maxCount) {
+                map.put(s.charAt(left), map.getOrDefault(s.charAt(left), 0) -1);
+                left++;
+            }
+            maxLength = Math.max(maxLength, right - left + 1);
+            right++;
+
+        }
+        return maxLength;
+    }
 }

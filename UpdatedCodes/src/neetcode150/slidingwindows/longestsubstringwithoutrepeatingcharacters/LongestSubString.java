@@ -47,4 +47,35 @@ public class LongestSubString {
 
         return result;
     }
+
+    public int lengthOfLongestSubstringTemplate(String s) {
+        int start = 0, end = 0, result = 0;
+        // current character and their frequency in s
+        Map<Character, Integer> map = new HashMap<>();
+        while (end < s.length()) {
+            map.put(s.charAt(end), map.getOrDefault(s.charAt(end), 0) + 1);
+            int windowSize = end - start + 1;
+            // checking whether this map is unique or not
+            if (map.size() == windowSize) {
+                result = Math.max(result, windowSize);
+                end++;
+            } else {
+                while (map.size() < windowSize) {
+                    map.put(s.charAt(start), map.getOrDefault(s.charAt(start), 0) - 1);
+                    if (map.get(s.charAt(start)) == 0) {
+                        map.remove(s.charAt(start));
+                    }
+                    start++;
+                    windowSize = end - start + 1;
+                }
+                if (map.size() == windowSize) {
+                    result = Math.max(result, windowSize);
+                }
+
+                end++;
+            }
+        }
+
+        return result;
+    }
 }
