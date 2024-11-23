@@ -1,8 +1,6 @@
 package neetcode150.slidingwindows.fixedwindowsize.substringwithconcatenatedofallwords;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class SubStringWithConcatenation {
     public static void main(String[] args) {
@@ -27,6 +25,61 @@ public class SubStringWithConcatenation {
         return result;
     }
 
+    // O(n . m . k)
+    public List<Integer> findSubstring(String s, String[] words) {
+        List<Integer> result = new ArrayList<>();
+        if (s == null || s.isEmpty() || words == null || words.length == 0) {
+            return result;
+        }
+
+        int wordLen = words[0].length();
+        int totalLen = wordLen * words.length;
+        Map<String, Integer> wordsCount = new HashMap<>();
+
+        // Count frequency of each word
+        for (String word : words) {
+            wordsCount.put(word, wordsCount.getOrDefault(word, 0) + 1);
+        }
+
+        // check each position starting position in s
+        // window size: totalLen
+        for (int start = 0; start <= s.length() - totalLen; start++) {
+            // Count of words seen in current windows
+            Map<String, Integer> seen = new HashMap<>();
+            boolean valid = true;
+
+            // Check each word position in the current window
+            for (int j = 0; j < totalLen; j+= wordLen) {
+                String currWord = s.substring(start + j, start + j + wordLen);
+
+                // if word is not in original list or we've used too many instances
+                if (!wordsCount.containsKey(currWord)) {
+                    valid = false;
+                    break;
+                }
+
+                // Update count of seen words
+                seen.put(currWord, seen.getOrDefault(currWord, 0) + 1);
+                if (seen.get(currWord) > wordsCount.get(currWord))
+                {
+                    valid = false;
+                    break;
+                }
+
+            }
+
+            if (valid) {
+                result.add(start);
+            }
+        }
+
+        return result;
+    }
+
+    public List<Integer> findSubstringOptimized(String s, String[] words) {
+        return null;
+        // difficult to implement, will take a look at that later on
+    }
 
     public static List<String> generatePermutations(List<String> words) {
         List<String> result = new ArrayList<>(words);
