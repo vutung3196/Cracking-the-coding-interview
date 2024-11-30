@@ -80,16 +80,16 @@ public class Solution {
     }
 
     // Example usage and test
-    public static void main1(String[] args) {
+    public static void main(String[] args) {
         // Test case from the problem statement
-//        int N = 3;
-//        int M = 3;
-//        String[] recommendations = {"1 2", "2 1", "2 3"};
-//
-//        int result = calculateUniversallyRecommended(N, M, recommendations);
-//        System.out.println("Universally Recommended Students: " + result);
+        int N = 3;
+        int M = 3;
+        String[] recommendations = {"1 2", "2 1", "2 3"};
 
-        System.out.println(findNext(33));
+        int result = calculateUniversallyRecommended(N, M, recommendations);
+        System.out.println("Universally Recommended Students: " + result);
+
+//        System.out.println(findNext(33));
     }
 
     // finding n = p ^ 2 +  (p + 1) ^ 2 + (p + 2) ^ 2 + (p + 3) ^ 2 + ... + (p +m) ^ 2
@@ -183,7 +183,7 @@ public class Solution {
         return false;
     }
 
-    public static void main(String[] args) {
+    public static void main1(String[] args) {
         // Test cases
         System.out.println(findNext(7));   // Output: 8
         System.out.println(findNext(69));  // Output: 36
