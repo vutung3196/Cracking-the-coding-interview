@@ -1,192 +1,153 @@
 package companies.trendmicro.codilitytest;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class Solution {
-    /**
-     * Calculates the number of students recommended by every other student
-     *
-     * @param N Number of students in the school (1 <= N <= 100)
-     * @param M Number of explicit recommendations
-     * @param recommendations Array of recommendation pairs
-     * @return Number of students recommended by everyone
-     */
-    public static int calculateUniversallyRecommended(int N, int M, String[] recommendations) {
-        // Create an adjacency list to represent recommendation graph
-        List<Set<Integer>> graph = new ArrayList<>(N + 1);
-        for (int i = 0; i < N + 1; i++) {
-            graph.add(new HashSet<>());
-        }
+    Map<Integer, List<Integer>> graph;
+    int[] parent;
 
-        // Populate initial recommendations
-        for (String rec : recommendations) {
-            String[] parts = rec.split(" ");
-            int from = Integer.parseInt(parts[0]);
-            int to = Integer.parseInt(parts[1]);
-            graph.get(from).add(to);
-        }
+    public int[] solve(String[] input) {
+        // Parse input
+        String[] firstLine = input[0].split(" ");
+        int n = Integer.parseInt(firstLine[0]);
+        int m = Integer.parseInt(firstLine[1]);
 
-        // Compute transitive closure
-        for (int i = 1; i <= N; i++) {
-            Set<Integer> recommendedBy = new HashSet<>();
-            dfs(graph, i, recommendedBy, new boolean[N + 1]);
-            graph.get(i).addAll(recommendedBy);
-        }
+        // Build graph
+        graph = new HashMap<>();
 
-        // Count students recommended by everyone
-        int universallyRecommended = 0;
-        for (int student = 1; student <= N; student++) {
-            boolean isRecommendedByAll = true;
-
-            // check if it is recommended by all students
-            for (int recommender = 1; recommender <= N; recommender++) {
-                if (recommender != student && !graph.get(recommender).contains(student)) {
-                    isRecommendedByAll = false;
-                    break;
-                }
+        // Add edges
+        int maxKey = 0;
+        for (int i = 1; i < n; i++) {
+            String[] edge = input[i].split(" ");
+            int u = Integer.parseInt(edge[0]);
+            int v = Integer.parseInt(edge[1]);
+            if (!graph.containsKey(u)) {
+                graph.put(u, new ArrayList<>());
+            }
+            if (!graph.containsKey(v)) {
+                graph.put(v, new ArrayList<>());
             }
 
-            if (isRecommendedByAll) {
-                universallyRecommended++;
+            if (u > maxKey) {
+                maxKey = u;
             }
+            if (v > maxKey) {
+                maxKey = v;
+            }
+
+            graph.get(u).add(v);
+            graph.get(v).add(u);
         }
 
+        parent = new int[maxKey+1];
+        boolean[] visited = new boolean[maxKey+1];
+        List<Integer> results = new ArrayList<>();
 
-        return universallyRecommended;
-    }
+        // Track red/black segment status
+        boolean[][] blackSegments = new boolean[maxKey+1][maxKey+1];
 
-    /**
-     * Depth-first search to compute transitive recommendations
-     *
-     * @param graph Recommendation graph
-     * @param current Current student
-     * @param recommendedBy Set to store transitive recommendations
-     * @param visited Visited array to prevent cycles
-     */
-    private static void dfs(List<Set<Integer>> graph, int current,
-                            Set<Integer> recommendedBy, boolean[] visited) {
-        visited[current] = true;
-        // explore all directly recommended students
+        // Process operations
+        for (int i = n; i < n+m; i++) {
+            String[] op = input[i].split(" ");
+            int opi = Integer.parseInt(op[0]);
+            int a = Integer.parseInt(op[1]);
+            int b = Integer.parseInt(op[2]);
 
-        for (int recommend : graph.get(current)) {
-            if (!visited[recommend]) {
-                recommendedBy.add(recommend);
-                dfs(graph, recommend, recommendedBy, visited);
-            }
-        }
-    }
+            // Find path between a and b
+            List<Integer> path = findPath(a, b);
 
-    // Example usage and test
-    public static void main(String[] args) {
-        // Test case from the problem statement
-        int N = 3;
-        int M = 3;
-        String[] recommendations = {"1 2", "2 1", "2 3"};
-
-        int result = calculateUniversallyRecommended(N, M, recommendations);
-        System.out.println("Universally Recommended Students: " + result);
-
-//        System.out.println(findNext(33));
-    }
-
-    // finding n = p ^ 2 +  (p + 1) ^ 2 + (p + 2) ^ 2 + (p + 3) ^ 2 + ... + (p +m) ^ 2
-    public static String[] findSequences(int n) {
-        var resultArray = new ArrayList<String>();
-        int p = 1;
-        while (Math.pow(p, 2) < n) {
-            double currentSum = 0;
-            int m = 0;
-            // loop through every m
-            while (currentSum < n) {
-                currentSum += Math.pow(p + m, 2);
-                if (currentSum == n) {
-                    var sb = new StringBuilder();
-                    sb.append((m + 1) + " ");
-                    for (int i = 0; i < m + 1; i++) {
-                        if (i == m) {
-                            sb.append(p + i);
-                        } else {
-                            sb.append(p + i + " ");
-                        }
+            if (opi == 1) {
+                // Change connected segments to red
+                for (int node : path) {
+                    for (int neighbor : graph.get(node)) {
+                        blackSegments[node][neighbor] = false;
+                        blackSegments[neighbor][node] = false;
                     }
-                    resultArray.add(sb.toString());
+                    // Color path black
+                    for (int j = 0; j < path.size() - 1; j++) {
+                        blackSegments[path.get(j)][path.get(j+1)] = true;
+                        blackSegments[path.get(j+1)][path.get(j)] = true;
+                    }
                 }
-                m++;
-            }
-            p++;
-        }
-
-        var result = new ArrayList<String>();
-        var length = resultArray.size();
-        result.add(String.valueOf(length));
-        result.addAll(resultArray);
-
-        // convert result to array
-        String[] finalResult = result.toArray(new String[0]);
-        finalResult[0] = resultArray.size() + " ";
-        return finalResult;
-    }
-
-    public static int findNext(int roseNumber) {
-        if (multipleOfContaining7(roseNumber) || String.valueOf(roseNumber).contains("7")) {
-            return -1;
-        }
-
-        int current = roseNumber + 1;
-        while  ((multipleOfContaining7(current) || String.valueOf(current).contains("7"))
-                && current > roseNumber) {
-            current++;
-        }
-
-        return current;
-    }
-
-    public static boolean multipleOfContaining7(int number) {
-        int start = 7;
-        while (start < number) {
-            if (number % start == 0) {
-                return true;
-            }
-            start += 10;
-        }
-        return false;
-    }
-
-    public static int findNextNumber(int x) {
-        int next = x + 1;
-
-        while (true) {
-            // Check if next number is valid to call
-            if (!containsSeven(next) && !isMultipleOfSevenExcluded(next)) {
-                return next;
-            }
-            next++;
-
-            // Prevent infinite loop
-            if (next > 1000) return -1;
-        }
-    }
-
-    private static boolean containsSeven(int num) {
-        return String.valueOf(num).contains("7");
-    }
-
-    private static boolean isMultipleOfSevenExcluded(int num) {
-        for (int i = 2; i <= num/7; i++) {
-            if (containsSeven(i * 7)) {
-                return true;
+            } else {
+                // Count black segments in path
+                int blackCount = 0;
+                for (int j = 0; j < path.size() - 1; j++) {
+                    if (blackSegments[path.get(j)][path.get(j+1)]) {
+                        blackCount++;
+                    }
+                }
+                results.add(blackCount);
             }
         }
-        return false;
+
+        // Convert results to array
+        return results.stream().mapToInt(Integer::intValue).toArray();
     }
 
-    public static void main1(String[] args) {
-        // Test cases
-        System.out.println(findNext(7));   // Output: 8
-        System.out.println(findNext(69));  // Output: 36
-        System.out.println(findNext(300)); // Output: -1
+    private List<Integer> findPath(int start, int end) {
+        // Reset parent array
+        Arrays.fill(parent, 0);
+
+        // BFS to find path
+        Queue<Integer> queue = new LinkedList<>();
+        boolean[] visited = new boolean[10];
+        queue.offer(start);
+        visited[start] = true;
+
+        while (!queue.isEmpty()) {
+            int current = queue.poll();
+
+            if (current == end) {
+                break;
+            }
+
+            for (int neighbor : graph.get(current)) {
+                if (!visited[neighbor]) {
+                    queue.offer(neighbor);
+                    visited[neighbor] = true;
+                    parent[neighbor] = current;
+                }
+            }
+        }
+
+        // Reconstruct path
+        List<Integer> path = new ArrayList<>();
+        for (int at = end; at != 0; at = parent[at]) {
+            path.add(at);
+        }
+
+        Collections.reverse(path);
+
+        return path;
+    }
+
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+
+        // Sample input matching the problem description
+        String[] input = {
+                "8 5",        // n (stations) and m (operations)
+                "1 2",        // edge between station 1 and 2
+                "1 3",        // edge between station 1 and 3
+                "3 4",        // edge between station 3 and 4
+                "4 5",        // edge between station 4 and 5
+                "4 6",        // edge between station 4 and 6
+                "2 8",        // edge between station 2 and 8
+                "2 9",        // edge between station 2 and 9
+                "1 1 6",      // Operation 1: modify segments between stations 1 and 6
+                "1 2 4",      // Operation 1: modify segments between stations 2 and 4
+                "2 1 6",      // Operation 2: count black segments between stations 1 and 6
+                "1 1 5",      // Operation 1: modify segments between stations 1 and 5
+                "2 2 6"       // Operation 2: count black segments between stations 2 and 6
+        };
+
+        int[] results = solution.solve(input);
+
+        // Print results
+        System.out.println("Results:");
+        for (int result : results) {
+            System.out.println(result);
+        }
     }
 }

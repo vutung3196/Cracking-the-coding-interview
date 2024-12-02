@@ -73,7 +73,6 @@ public class StringCompression {
         }
 
 
-
         return current;
     }
 
@@ -104,8 +103,6 @@ public class StringCompression {
 
             i += count;
         }
-
-
 
         return current;
     }

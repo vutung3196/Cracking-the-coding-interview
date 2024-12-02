@@ -4,9 +4,12 @@ import java.util.*;
 
 public class GraphColoring {
     public static void main(String[] args) {
-        List<String> input = Arrays.asList("8 5", "1 3", "3 4", "4 6", "4 5", "1 2", "2 9", "2 8", "1 1 6", "1 1 8", "2 1 6");
+        List<String> input = Arrays.asList("8 5", "1 2", "1 3", "3 4","4 5", "4 6", "2 8", "2 9", "1 1 6", "1 2 4", "2 1 6", "1 1 5", "2 2 6");
         List<Integer> result = processOperations(input);
-        System.out.println(result); // Expected: [number of black segments in path 1 to 6]
+
+        for (var element : result) {
+            System.out.println(element);
+        }
     }
 
     public static List<Integer> processOperations(List<String> input) {
@@ -21,7 +24,7 @@ public class GraphColoring {
 
         boolean[] isBlack = new boolean[n + 1];
 
-        for (int i = 1; i <= n; i++) {
+        for (int i = 1; i < n; i++) {
             String[] edge = input.get(i).split(" ");
             int u = Integer.parseInt(edge[0]);
             int v = Integer.parseInt(edge[1]);
