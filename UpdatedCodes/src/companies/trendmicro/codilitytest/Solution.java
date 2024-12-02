@@ -127,19 +127,16 @@ public class Solution {
 
         // Sample input matching the problem description
         String[] input = {
-                "8 5",        // n (stations) and m (operations)
-                "1 2",        // edge between station 1 and 2
-                "1 3",        // edge between station 1 and 3
-                "3 4",        // edge between station 3 and 4
-                "4 5",        // edge between station 4 and 5
-                "4 6",        // edge between station 4 and 6
-                "2 8",        // edge between station 2 and 8
-                "2 9",        // edge between station 2 and 9
-                "1 1 6",      // Operation 1: modify segments between stations 1 and 6
-                "1 2 4",      // Operation 1: modify segments between stations 2 and 4
-                "2 1 6",      // Operation 2: count black segments between stations 1 and 6
-                "1 1 5",      // Operation 1: modify segments between stations 1 and 5
-                "2 2 6"       // Operation 2: count black segments between stations 2 and 6
+            "6 4",        // n (stations) and m (operations)
+            "1 2",        // edge between station 1 and 2
+            "1 3",        // edge between station 1 and 3
+            "2 4",        // edge between station 2 and 4
+            "2 5",        // edge between station 2 and 5
+            "3 6",        // edge between station 3 and 6
+            "1 1 4",      // Operation 1: modify segments between stations 1 and 4
+            "2 1 4",      // Operation 2: count black segments between stations 1 and 4
+            "1 3 6",      // Operation 1: modify segments between stations 3 and 6
+            "2 1 6"       // Operation 2: count black segments between stations 1 and 6
         };
 
         int[] results = solution.solve(input);
