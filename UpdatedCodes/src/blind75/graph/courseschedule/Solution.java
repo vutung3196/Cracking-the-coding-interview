@@ -102,4 +102,42 @@ public class Solution {
         var directedCycle = new DirectedCycle(graph);
         return directedCycle.hasCycle();
     }
+
+    // pair [0, 1], indicate that to take course 0, you have to take course 1 first
+    public boolean canFinishV2(int numCourses, int[][] prerequisites) {
+        // True if you can finish all courses, false otherwise
+        // We will introduce an indegree array to check the degree of the nodes
+        int[] inDegree = new int[numCourses];
+        List<List<Integer>> adj = new ArrayList<>(numCourses);
+
+        // adding nodes
+        for (int i = 0; i < numCourses; i++) {
+            adj.add(i, new ArrayList<>());
+        }
+
+        // adding edges
+        for (int[] prerequisite : prerequisites) {
+            adj.get(prerequisite[1]).add(prerequisite[0]);
+            inDegree[prerequisite[0]]++;
+        }
+
+        Queue<Integer> queue = new LinkedList<>();
+        for (int i = 0; i < numCourses; i++) {
+            queue.offer(i);
+        }
+        int nodesVisited = 0;
+        while (!queue.isEmpty()) {
+            int node = queue.poll();
+            nodesVisited++;
+
+            for (var neighbor : adj.get(node)) {
+                inDegree[neighbor]--;
+                if (inDegree[neighbor] == 0) {
+                    queue.offer(neighbor);
+                }
+            }
+        }
+
+        return nodesVisited == numCourses;
+    }
 }

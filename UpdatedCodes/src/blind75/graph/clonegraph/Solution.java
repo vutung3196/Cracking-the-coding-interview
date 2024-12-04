@@ -50,8 +50,33 @@ public class Solution {
         return visited.get(node);
     }
 
+    public static Node cloneGraphBFSRedo(Node node) {
+        if (node == null) return node;
+
+        HashMap<Node, Node> visited = new HashMap<>();
+        LinkedList<Node> queue = new LinkedList<>();
+        queue.add(node);
+        visited.put(node, new Node(node.val, new ArrayList<>()));
+
+        while  (!queue.isEmpty()) {
+            Node currentNode = queue.remove();
+            for (var neighbor : currentNode.neighbors) {
+                if (!visited.containsKey(neighbor)) {
+                    visited.put(neighbor, new Node(neighbor.val, new ArrayList<>()));
+                    queue.add(neighbor);
+                }
+
+                // add neighbor to the original node to the cloned node
+                visited.get(currentNode).neighbors.add(visited.get(neighbor));
+            }
+        }
+        return visited.get(node);
+    }
+
+
     public static Node cloneGraphDFS(Node node) {
         // TODO
+
         return null;
     }
 }

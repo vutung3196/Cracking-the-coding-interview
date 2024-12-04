@@ -52,7 +52,8 @@ public class GraphColoring {
         return results;
     }
 
-    private static void changeColor(List<List<Integer>> graph, boolean[] isBlack, int start, int end, boolean toBlack) {
+    private static void changeColor(List<List<Integer>> graph, boolean[] isBlack, int start,
+                                    int end, boolean toBlack) {
         Queue<Integer> queue = new LinkedList<>();
         boolean[] visited = new boolean[isBlack.length];
         queue.add(start);
