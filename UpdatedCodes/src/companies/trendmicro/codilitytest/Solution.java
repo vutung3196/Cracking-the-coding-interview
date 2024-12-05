@@ -6,6 +6,9 @@ public class Solution {
     Map<Integer, List<Integer>> graph;
     int[] parent;
 
+
+    // Time complexity:  O(n + m * V).
+    // Space complexity: O(V^2 + E + m).
     public int[] solve(String[] input) {
         // Parse input
         String[] firstLine = input[0].split(" ");
