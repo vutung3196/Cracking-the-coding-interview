@@ -8,6 +8,24 @@ public class NumberOfProvinces {
 
     }
 
+    public int findCircleNumUF(int[][] isConnected) {
+        if (isConnected == null || isConnected.length == 0) {
+            return -1;
+        }
+
+        int n = isConnected.length;
+        UnionFind uf = new UnionFind(n);
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if (isConnected[i][j] == 1) {
+                    uf.union(i, j);
+                }
+            }
+        }
+
+        return uf.count;
+    }
+
     private static int findCircleNum(int[][] connectedMap) {
         // 1: directly connected: same province
         // 0: indirectly connected: not in the same province
