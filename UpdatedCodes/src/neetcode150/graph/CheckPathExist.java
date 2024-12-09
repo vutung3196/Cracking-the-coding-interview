@@ -43,8 +43,6 @@ public class CheckPathExist {
                     queue.offer(neighbor);
                 }
             }
-
-
         }
         return false;
     }
