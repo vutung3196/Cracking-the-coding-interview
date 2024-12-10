@@ -1,8 +1,6 @@
 package CompaniesInterview.affirm;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class ShortestSubstring {
     public static void main(String[] args) {
@@ -13,14 +11,7 @@ public class ShortestSubstring {
         for (var str : result) {
             System.out.println(str);
         }
-
-//        var substrings = findSubStrings("gfnt");
-//        for (var str : substrings) {
-//            System.out.println(str);
-//        }
     }
-
-
 
     //    You are given an array arr of size n consisting of non-empty strings.
     //    Find a string array answer of size n such that:
@@ -30,6 +21,8 @@ public class ShortestSubstring {
     //    lexicographically smallest
     //    And if no such substring exists, answer[i] should be an empty string.
     //    Return the array answer.
+    // Time complexity O(n^2 * m^3)
+    // Space complexity O(n * m^2)
     public static String[] shortestSubstring(String[] arr) {
         var result = new ArrayList<String>();
         for (int i = 0; i < arr.length; i++) {
@@ -42,8 +35,23 @@ public class ShortestSubstring {
             }
         }
         return result.toArray(new String[0]);
-
     }
+
+    public static Map<String, String> shortestSubstringBruteForce(String[] arr) {
+        Map<String, String> result = new HashMap<>();
+        for (int i = 0; i < arr.length; i++) {
+            String str = arr[i];
+            String subString = exist(str, arr, i);
+            if (subString == null) {
+                result.putIfAbsent(str, "");
+            } else {
+                result.putIfAbsent(str, subString);
+            }
+        }
+
+        return result;
+    }
+
 
     public static String exist(String str, String[] arr, int index) {
         var result = new ArrayList<String>();
@@ -87,8 +95,8 @@ public class ShortestSubstring {
         return Collections.min(shortestStrings);
     }
 
-    private static List<String> findSubStrings(String str) {
-        var result = new ArrayList<String>();
+    private static Set<String> findSubStrings(String str) {
+        var result = new HashSet<String>();
 
         for (int i = 0; i < str.length(); i++) {
             result.add(Character.toString(str.charAt(i)));
